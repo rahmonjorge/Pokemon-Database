@@ -5,9 +5,9 @@ public class Pokemon {
 	int number;
 	ElementalType type1, type2;
 	boolean legendary;
-	public Pokemon(String name, int number, ElementalType type1, ElementalType type2, boolean legendary) {
-		this.name = name;
+	public Pokemon(int number, String name, ElementalType type1, ElementalType type2, boolean legendary) {
 		this.number = number;
+		this.name = name;
 		this.type1 = type1;
 		this.type2 = type2;
 		this.legendary = legendary;
@@ -36,7 +36,7 @@ public class Pokemon {
 	public void setType2(ElementalType type2) {
 		this.type2 = type2;
 	}
-	public boolean isLegendary() {
+	public boolean getLegendary() {
 		return legendary;
 	}
 	public void setLegendary(boolean legendary) {

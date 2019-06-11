@@ -27,7 +27,7 @@ public class PokemonController {
 			throw new IllegalArgumentException("Invalid Pokémon Number.");
 		if(number < 1)
 			throw new IllegalArgumentException("Invalid Pokémon Number.");
-		Pokemon p = new Pokemon(name, number, type2, type2, legendary);
+		Pokemon p = new Pokemon(number, name, type2, type2, legendary);
 		pokemonRepository.add(p);
 		return p;
 	}
