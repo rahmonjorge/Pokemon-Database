@@ -42,4 +42,8 @@ public class Pokemon {
 	public void setLegendary(boolean legendary) {
 		this.legendary = legendary;
 	}
+	public Object[] toArray(){
+		Object[] array = {(Integer) getNumber(), getName(), getType1(), getType2(), getLegendary()};
+		return array;
+	}
 }

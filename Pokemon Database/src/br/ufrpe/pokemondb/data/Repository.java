@@ -1,5 +1,6 @@
 package br.ufrpe.pokemondb.data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import br.ufrpe.pokemondb.exceptions.ObjectAlreadyExistsException;
@@ -8,6 +9,10 @@ import br.ufrpe.pokemondb.exceptions.ObjectDoesNotExistsException;
 public class Repository<T> implements IRepository<T>{
 
 	protected List<T> objects;
+	
+	public Repository() {
+		objects = new ArrayList<>();
+	}
 	
 	public void add(T newObject) throws ObjectAlreadyExistsException {
 		if(!objects.contains(newObject))
@@ -32,8 +37,7 @@ public class Repository<T> implements IRepository<T>{
 	}
 
 	public List<T> list() {
-		// TODO Auto-generated method stub
-		return null;
+		return objects;
 	}
 
 }
