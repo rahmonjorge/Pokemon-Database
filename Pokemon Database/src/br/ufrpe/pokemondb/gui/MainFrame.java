@@ -5,17 +5,22 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JToolBar;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 
 import br.ufrpe.pokemondb.business.beans.ElementalType;
 import br.ufrpe.pokemondb.business.beans.Pokemon;
 
-public class MainFrame implements ActionListener{
+public class MainFrame implements ActionListener, ListSelectionListener{
+	//Frame
+	private JFrame mainWindow = new JFrame("Pokémon Database");
 	
 	//Beans
 	static Pokemon pikachu = new Pokemon(25, "Pikachu",ElementalType.ELECTRIC, ElementalType.ELECTRIC, false);
@@ -29,6 +34,7 @@ public class MainFrame implements ActionListener{
 			{raichu .getNumber(), raichu .getName(), raichu .getType1(), raichu .getType2(), raichu .getLegendary()},
 			{articuno.getNumber(), articuno.getName(), articuno.getType1(), articuno.getType2(), articuno.getLegendary()},
 	};
+	
 	static JTable table = new JTable(data, colNames);
 	static JScrollPane tableContainer = new JScrollPane(table);
 	
@@ -37,34 +43,30 @@ public class MainFrame implements ActionListener{
 	static final String REMOVE = "remove";
 	static final String UPDATE = "update";
 		
-	public void createAndShowGUI() {
-		//Pre-Framework
-		JFrame mainWindow = new JFrame("Pokémon Database");
+	public void createAndShowGUI() {		
+		//Table Framework
+		table.setFillsViewportHeight(true);
 			
-		//Framework
-			//Table Framework
-			table.setFillsViewportHeight(true);
+		//Tool Bar
+		JToolBar toolBar = new JToolBar();
+		toolBar.setFloatable(false);
+		toolBar.setRollover(true);
+			//Tool Bar Buttons
+			JButton button = null;
+			button = ButtonBuilder.createButton("Add","ADD","New Pokemon", this);
+			toolBar.add(button);
+			button = ButtonBuilder.createButton("Remove","REMOVE","Delete Pokemon", this);
+			toolBar.add(button);
+			button = ButtonBuilder.createButton("Update","UPDATE","Edit Pokemon", this);
+			toolBar.add(button);
 			
-			//Tool Bar
-			JToolBar toolBar = new JToolBar();
-			toolBar.setFloatable(false);
-			toolBar.setRollover(true);
-				//Tool Bar Buttons
-				JButton button = null;
-				button = ButtonBuilder.createButton("AddPokemon","ADD","New Pokemon","New", this);
-				toolBar.add(button);
-				button = ButtonBuilder.createButton("RemovePokemon","REMOVE","Delete Pokemon","Delete", this);
-				toolBar.add(button);
-				button = ButtonBuilder.createButton("UpdatePokemon","UPDATE","Edit Pokemon","Edit", this);
-				toolBar.add(button);
-			
-		//Post-Framework
+		//Main Framework
 		mainWindow.add(tableContainer, BorderLayout.CENTER);
 		mainWindow.add(toolBar, BorderLayout.PAGE_START);
-		
 		mainWindow.setPreferredSize(new Dimension(640,480));
 		mainWindow.pack();
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		mainWindow.setLocationRelativeTo(null);
 		mainWindow.setVisible(true);
 	}
 
@@ -72,17 +74,26 @@ public class MainFrame implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		switch(e.getActionCommand()) {
 		case "ADD":
-			JFrame addPokemonWindow = new JFrame("Add Pokemon");
-			addPokemonWindow.setPreferredSize(new Dimension(320,240));
-			addPokemonWindow.pack();
-			addPokemonWindow.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-			addPokemonWindow.setVisible(true);
+			new NewPokemonFrame().createAndShowGUI();
 			break;
 		case "UPDATE":
+			//TODO Open update window to update a selected row on the table
 			break;
 		case "REMOVE":
+			if(table.getSelectedRowCount() > 0) {
+				//TODO Display dialog 'are you sure to delete selected row(s)?'
+			}
+			else {
+				//TODO Display dialog 'select at least one row'
+			}
 			break;
 		default:
 		}
+	}
+
+	@Override
+	public void valueChanged(ListSelectionEvent arg0) {
+		
+		
 	}
 }

@@ -18,5 +18,14 @@ public enum ElementalType {
 	PSYCHIC,
 	ROCK,
 	STEEL,
-	WATER
+	WATER;
+	
+	public static String[] toArray() {
+		ElementalType[] types = values();
+	    String[] names = new String[types.length];
+	    for(int i = 0; i < types.length; i++) {
+	        names[i] = types[i].name();
+	    }
+	    return names;
+	}
 }
