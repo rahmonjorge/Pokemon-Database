@@ -24,8 +24,8 @@ public class Facade {
 		return instance;
 	}
 	
-	public Pokemon createPokemon(String name, int number, ElementalType type1, ElementalType type2, boolean legendary) 
+	public Pokemon insert(String name, int number, ElementalType type1, ElementalType type2, boolean legendary) 
 			throws ObjectAlreadyExistsException, NullPointerException, MaxRepositoryCapacityException {
-		return pokemonController.createPokemon(number, name, type1, type2, legendary);
+		return pokemonController.insert(number, name, type1, type2, legendary);
 	}
 }

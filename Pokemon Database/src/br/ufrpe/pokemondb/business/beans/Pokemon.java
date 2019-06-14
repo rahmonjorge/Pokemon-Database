@@ -42,6 +42,17 @@ public class Pokemon {
 	public void setLegendary(boolean legendary) {
 		this.legendary = legendary;
 	}
+	public boolean equals(Pokemon p) {
+		if(
+				this.number == p.getNumber() &&
+				this.name.equals(p.getName()) &&
+				this.type1.equals(p.getType1()) &&
+				this.type2.equals(p.type2) &&
+				this.legendary == p.getLegendary()) {
+			return true;
+		}
+		return false;
+	}
 	public Object[] toArray(){
 		Object[] array = {(Integer) getNumber(), getName(), getType1(), getType2(), getLegendary()};
 		return array;

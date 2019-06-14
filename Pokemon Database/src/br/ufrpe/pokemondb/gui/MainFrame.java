@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -14,12 +15,31 @@ import javax.swing.JToolBar;
 import javax.swing.event.TableModelEvent;
 import javax.swing.event.TableModelListener;
 
+import br.ufrpe.pokemondb.business.PokemonController;
+import br.ufrpe.pokemondb.business.beans.Pokemon;
+
 public class MainFrame implements ActionListener, TableModelListener{
 	
-	static JFrame mainWindow = new JFrame("Pokémon Database");
-	static TableModel tableModel = new TableModel();
-	static JTable table = new JTable(tableModel);
-	static JScrollPane tableContainer = new JScrollPane(table);
+	private static MainFrame instance;
+	
+	private JFrame mainWindow;
+	private TableModel tableModel;
+	private JTable table;
+	private JScrollPane tableContainer;
+	
+	private MainFrame() {
+		mainWindow = new JFrame("Pokémon Database");
+		tableModel = new TableModel((ArrayList<Pokemon>) PokemonController.getInstance().list());
+		table = new JTable(tableModel);
+		 tableContainer = new JScrollPane(table);
+	}
+	
+	public static MainFrame getInstance() {
+		if(instance == null) {
+			instance = new MainFrame();
+		}
+		return instance;
+	}
 	
 	public void createAndShowGUI() {
 		
@@ -94,15 +114,11 @@ public class MainFrame implements ActionListener, TableModelListener{
 		}
 	}
 
-	public static void updateTable() {
-		mainWindow.remove(tableContainer);
-		tableModel = new TableModel();
-		table = new JTable(tableModel);
-		mainWindow.add(tableContainer, BorderLayout.CENTER);
-		System.out.println("[MainFrame.updateTable()] Table updated. There are ("+table.getModel().getRowCount()+") rows.");
-		
-		tableContainer = new JScrollPane(table);
-		mainWindow.add(tableContainer, BorderLayout.CENTER);
+	public void updateTable() {
+		ArrayList<Pokemon> updatedList = new ArrayList<>();
+		updatedList.addAll(PokemonController.getInstance().list());
+		tableModel.setAllValues(updatedList);
+		table.updateUI();
 	}
 	
 	@Override

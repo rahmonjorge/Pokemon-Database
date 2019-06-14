@@ -1,5 +1,7 @@
 package br.ufrpe.pokemondb.business;
 
+import java.util.List;
+
 import br.ufrpe.pokemondb.business.beans.ElementalType;
 import br.ufrpe.pokemondb.business.beans.Pokemon;
 import br.ufrpe.pokemondb.data.Repository;
@@ -24,7 +26,7 @@ public class PokemonController {
 		return instance;
 	}
 	
-	public Pokemon createPokemon(int number, String name, ElementalType type1, ElementalType type2, boolean legendary) 
+	public Pokemon insert(int number, String name, ElementalType type1, ElementalType type2, boolean legendary) 
 			throws ObjectAlreadyExistsException, NullPointerException, MaxRepositoryCapacityException {
 		if(pokemonRepository.list().size() > 99) {
 			throw new MaxRepositoryCapacityException();
@@ -35,11 +37,10 @@ public class PokemonController {
 			throw new IllegalArgumentException("Invalid Pokémon Number.");
 		Pokemon p = new Pokemon(number, name, type2, type2, legendary);
 		pokemonRepository.add(p);
-		System.out.println("[PokemonController.createPokemon()]Pokemon "+p.getName()+" added to the repository.");
 		return p;
 	}
 	
-	public Repository<Pokemon> getRepository() {
-		return pokemonRepository;
+	public List<Pokemon> list() {
+		return pokemonRepository.list();
 	}
 }
