@@ -12,26 +12,27 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JToolBar;
-import javax.swing.event.TableModelEvent;
-import javax.swing.event.TableModelListener;
+import javax.swing.ListSelectionModel;
 
+import br.ufrpe.pokemondb.business.Facade;
 import br.ufrpe.pokemondb.business.PokemonController;
 import br.ufrpe.pokemondb.business.beans.Pokemon;
+import br.ufrpe.pokemondb.exceptions.ObjectDoesNotExistsException;
 
-public class MainFrame implements ActionListener, TableModelListener{
+public class MainFrame implements ActionListener{
 	
 	private static MainFrame instance;
 	
 	private JFrame mainWindow;
-	private TableModel tableModel;
+	private TableModel dataModel;
 	private JTable table;
 	private JScrollPane tableContainer;
 	
 	private MainFrame() {
 		mainWindow = new JFrame("Pokémon Database");
-		tableModel = new TableModel((ArrayList<Pokemon>) PokemonController.getInstance().list());
-		table = new JTable(tableModel);
-		 tableContainer = new JScrollPane(table);
+		dataModel = new TableModel(PokemonController.getInstance().list());
+		table = new JTable(dataModel);
+		tableContainer = new JScrollPane(table);
 	}
 	
 	public static MainFrame getInstance() {
@@ -44,7 +45,7 @@ public class MainFrame implements ActionListener, TableModelListener{
 	public void createAndShowGUI() {
 		
 		//Table Framework
-		table.getModel().addTableModelListener(this);
+		table.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		table.setFillsViewportHeight(true);
 			
 		//Tool Bar
@@ -53,11 +54,11 @@ public class MainFrame implements ActionListener, TableModelListener{
 		toolBar.setRollover(true);
 			//Tool Bar Buttons
 			JButton button = null;
-			button = ButtonBuilder.createButton("Novo","ADD","New Pokemon", this);
+			button = ButtonBuilder.createButton("Novo","NEW","New Pokemon", this);
 			toolBar.add(button);
 			button = ButtonBuilder.createButton("Remover","REMOVE","Delete Pokemon", this);
 			toolBar.add(button);
-			button = ButtonBuilder.createButton("Editar","UPDATE","Edit Pokemon", this);
+			button = ButtonBuilder.createButton("Editar","EDIT","Edit Pokemon", this);
 			toolBar.add(button);
 			
 		//Main Framework
@@ -79,13 +80,20 @@ public class MainFrame implements ActionListener, TableModelListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		switch(e.getActionCommand()) {
-		case "ADD":
+		case "NEW":
 			new NewPokemonFrame().createAndShowGUI();
 			break;
-		case "UPDATE":
+		case "EDIT":
 			if(table.getSelectedRowCount() == 1) {
-				Object selectedObject = table.getModel().getValueAt(table.getSelectedRow(), table.getSelectedColumn());
-				new NewPokemonFrame(selectedObject).createAndShowGUI();
+				try {
+					Pokemon selectedPokemon = Facade.getInstance().browse((int) table.getModel().getValueAt(table.getSelectedRow(), 0));
+					new NewPokemonFrame(selectedPokemon).createAndShowGUI();
+				} catch (ObjectDoesNotExistsException e1) {
+					e1.printStackTrace();
+				} catch (NullPointerException e1) {
+					JOptionPane.showMessageDialog(new JFrame(), "A linha selecionada está vazia.");
+					e1.printStackTrace();
+				}
 			}
 			else if(table.getSelectedRowCount() == 0){
 				JOptionPane.showMessageDialog(new JFrame(), "Escolha um objeto da tabela.");
@@ -96,14 +104,19 @@ public class MainFrame implements ActionListener, TableModelListener{
 			break;
 		case "REMOVE":
 			if(table.getSelectedRowCount() > 0) {
-				int n = JOptionPane.showConfirmDialog(
-                        mainWindow, "Tem certeza que deseja remover o(s) objeto(s) selecionado(s)?",
+				int optionSelected = JOptionPane.showConfirmDialog(
+                        mainWindow, "Tem certeza que deseja remover o objeto selecionado(s)?",
                         "Confirmar Remoção",
                         JOptionPane.YES_NO_OPTION);
-                 if (n == JOptionPane.YES_OPTION) {
-                	 //TODO Remove selection
-                 } else {
-                	 //Close window
+                 if (optionSelected == JOptionPane.YES_OPTION) {
+                	try {
+                		Pokemon selectedPokemon = Facade.getInstance().browse((int) table.getModel().getValueAt(table.getSelectedRow(), 0));
+						Facade.getInstance().remove(selectedPokemon);
+						updateTable();
+					} catch (ObjectDoesNotExistsException e1) {
+						JOptionPane.showMessageDialog(new JFrame(), "Houve uma tentativa de remover um objeto que não existe no repositório.\nIsso devia ser impossível.");
+						e1.printStackTrace();
+					}
                  }
 			}
 			else {
@@ -115,16 +128,9 @@ public class MainFrame implements ActionListener, TableModelListener{
 	}
 
 	public void updateTable() {
-		ArrayList<Pokemon> updatedList = new ArrayList<>();
-		updatedList.addAll(PokemonController.getInstance().list());
-		tableModel.setAllValues(updatedList);
+		TableModel newData = new TableModel(new ArrayList<Pokemon>(Facade.getInstance().list()));
+		table.setModel(newData);
 		table.updateUI();
-	}
-	
-	@Override
-	public void tableChanged(TableModelEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 	
 }

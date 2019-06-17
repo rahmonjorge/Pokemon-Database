@@ -53,8 +53,8 @@ public class Pokemon {
 		}
 		return false;
 	}
-	public Object[] toArray(){
-		Object[] array = {(Integer) getNumber(), getName(), getType1(), getType2(), getLegendary()};
-		return array;
+	@Override
+	public String toString() {
+		return number + "/" + name;
 	}
 }

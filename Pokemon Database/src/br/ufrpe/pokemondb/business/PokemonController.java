@@ -7,6 +7,7 @@ import br.ufrpe.pokemondb.business.beans.Pokemon;
 import br.ufrpe.pokemondb.data.Repository;
 import br.ufrpe.pokemondb.exceptions.MaxRepositoryCapacityException;
 import br.ufrpe.pokemondb.exceptions.ObjectAlreadyExistsException;
+import br.ufrpe.pokemondb.exceptions.ObjectDoesNotExistsException;
 /*
  * PokemonController: Contém o repositório de pokemons e as regras de negócio.
  * */
@@ -26,18 +27,30 @@ public class PokemonController {
 		return instance;
 	}
 	
-	public Pokemon insert(int number, String name, ElementalType type1, ElementalType type2, boolean legendary) 
+	public void insert(int number, String name, ElementalType type1, ElementalType type2, boolean legendary) 
 			throws ObjectAlreadyExistsException, NullPointerException, MaxRepositoryCapacityException {
 		if(pokemonRepository.list().size() > 99) {
 			throw new MaxRepositoryCapacityException();
 		}
 		if(name.length() < 1)
-			throw new IllegalArgumentException("Invalid Pokémon Number.");
+			throw new IllegalArgumentException("Invalid Pokémon Name.");
 		if(number < 1)
 			throw new IllegalArgumentException("Invalid Pokémon Number.");
-		Pokemon p = new Pokemon(number, name, type2, type2, legendary);
+		Pokemon p = new Pokemon(number, name, type1, type2, legendary);
 		pokemonRepository.add(p);
-		return p;
+	}
+	
+	public void remove(Pokemon p) throws ObjectDoesNotExistsException {
+		pokemonRepository.remove(p);
+	}
+	
+	public Pokemon browse(int number) throws ObjectDoesNotExistsException {
+		for(Pokemon listItem : pokemonRepository.list()) {
+			if(listItem.getNumber() == number) {
+				return listItem;
+			}
+		}
+		throw new ObjectDoesNotExistsException();
 	}
 	
 	public List<Pokemon> list() {

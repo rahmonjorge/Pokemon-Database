@@ -1,21 +1,26 @@
 package br.ufrpe.pokemondb.gui;
 
-import java.util.ArrayList;
+import java.util.List;
 
-import javax.swing.table.AbstractTableModel;
+import javax.swing.table.DefaultTableModel;
 
-import br.ufrpe.pokemondb.business.beans.ElementalType;
 import br.ufrpe.pokemondb.business.beans.Pokemon;
 
-public class TableModel extends AbstractTableModel {
+public class TableModel extends DefaultTableModel {
 	
 	private static final long serialVersionUID = 4487241321693602560L;
 	
 	private String[] columnNames = {"#","Nome","Tipo1","Tipo2","Lendário"};
-	private Object[][] tableData = new Object[100][5];
+	private Object[][] tableData = new Object[100][5]; // Can be improved by only instatiating this variable based on the amount of objects received by the constructor
 	
-	public TableModel(ArrayList<Pokemon> pokemons) {
-		setAllValues(pokemons);
+	public TableModel(List<Pokemon> pokemons) {
+		for(int i = 0; i < pokemons.size(); i++) {
+			tableData[i][0] = pokemons.get(i).getNumber();
+			tableData[i][1] = pokemons.get(i).getName();
+			tableData[i][2] = pokemons.get(i).getType1();
+			tableData[i][3] = pokemons.get(i).getType2();
+			tableData[i][4] = pokemons.get(i).getLegendary();
+		}
 	}
 	
 	public int getColumnCount() {
@@ -23,6 +28,9 @@ public class TableModel extends AbstractTableModel {
     }
 
 	public int getRowCount() {
+		if(tableData == null) {
+			return 0;
+		}
 		return tableData.length;
 	}
 	
@@ -34,11 +42,8 @@ public class TableModel extends AbstractTableModel {
         return tableData[row][col];
     }
 
-	public Class getColumnClass(int col) {
-		if(getValueAt(0,col) == null) {
-			return Pokemon.class;
-		}
-		return getValueAt(0, col).getClass();
+	public Class<?> getColumnClass(int col) {
+		return String.class;
     }
 
     public boolean isCellEditable(int row, int col) {
@@ -49,15 +54,4 @@ public class TableModel extends AbstractTableModel {
         tableData[row][col] = value;
         fireTableCellUpdated(row, col);
     }
-    
-    public void setAllValues(ArrayList<Pokemon> pokemons) {
-    	for(int i = 0; i < pokemons.size(); i++) {
-			tableData[i][0] = pokemons.get(i).getNumber();
-			tableData[i][1] = pokemons.get(i).getName(); System.out.println("[TableModel]Pokemon "+pokemons.get(i).getName()+" added to the tablemodel data array.");
-			tableData[i][2] = pokemons.get(i).getType1();
-			tableData[i][3] = pokemons.get(i).getType2();
-			tableData[i][4] = pokemons.get(i).getLegendary();
-		}
-    }
-
 }

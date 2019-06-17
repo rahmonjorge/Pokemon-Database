@@ -35,9 +35,14 @@ public class Repository<T> implements IRepository<T>{
 			throw new ObjectDoesNotExistsException();
 		
 	}
-
+	
 	public List<T> list() {
 		return objects;
+	}
+
+	public Object recover(T recoverMethod) throws ObjectDoesNotExistsException {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
