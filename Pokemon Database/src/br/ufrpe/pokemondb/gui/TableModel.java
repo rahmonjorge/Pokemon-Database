@@ -11,7 +11,7 @@ public class TableModel extends DefaultTableModel {
 	private static final long serialVersionUID = 4487241321693602560L;
 	
 	private String[] columnNames = {"#","Nome","Tipo1","Tipo2","Lendário"};
-	private Object[][] tableData = new Object[100][5]; // Can be improved by only instatiating this variable based on the amount of objects received by the constructor
+	private Object[][] tableData = new Object[23][5]; // Can be improved by only instatiating this variable based on the amount of objects received by the constructor
 	
 	public TableModel(List<Pokemon> pokemons) {
 		for(int i = 0; i < pokemons.size(); i++) {

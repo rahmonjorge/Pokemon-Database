@@ -55,6 +55,6 @@ public class Pokemon {
 	}
 	@Override
 	public String toString() {
-		return number + "/" + name;
+		return "Number: " + number + "Name" + name;
 	}
 }

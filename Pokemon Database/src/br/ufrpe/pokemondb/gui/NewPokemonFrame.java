@@ -28,7 +28,7 @@ import br.ufrpe.pokemondb.exceptions.MaxRepositoryCapacityException;
 import br.ufrpe.pokemondb.exceptions.ObjectAlreadyExistsException;
 import br.ufrpe.pokemondb.exceptions.ObjectDoesNotExistsException;
 
-public class NewPokemonFrame implements ActionListener, ItemListener{
+public class NewPokemonFrame extends AbstractFrame implements ActionListener, ItemListener {
 	
 	private JFrame addPokemonWindow = new JFrame("Novo Pokemon");
 	private JPanel mainPanel = new JPanel();
@@ -109,10 +109,8 @@ public class NewPokemonFrame implements ActionListener, ItemListener{
 			nameField.setText(editingPokemon.getName());
 			type1ComboBox.setSelectedItem(editingPokemon.getType1().name());
 			type2ComboBox.setSelectedItem(editingPokemon.getType2().name());
-			if(editingPokemon.getLegendary())
-				legendaryCheckBox.setSelected(true);
-			
-			defaultButton.setName("Editar");
+			if(editingPokemon.getLegendary()) {legendaryCheckBox.setSelected(true);}
+			defaultButton.setText("Editar");
 		}
 		
 		//Main Framework

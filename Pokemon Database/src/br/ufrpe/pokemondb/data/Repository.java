@@ -2,6 +2,8 @@ package br.ufrpe.pokemondb.data;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
+import java.util.NoSuchElementException;
 
 import br.ufrpe.pokemondb.exceptions.ObjectAlreadyExistsException;
 import br.ufrpe.pokemondb.exceptions.ObjectDoesNotExistsException;
@@ -15,10 +17,18 @@ public class Repository<T> implements IRepository<T>{
 	}
 	
 	public void add(T newObject) throws ObjectAlreadyExistsException {
-		if(!objects.contains(newObject))
-			objects.add(newObject);
-		else
-			throw new ObjectAlreadyExistsException();
+		ListIterator<T> iterator = objects.listIterator();
+		while(iterator.hasNext()) {
+			System.out.println(iterator.next().toString());
+			try {
+				if(iterator.next().equals(newObject)) {
+					throw new ObjectAlreadyExistsException();
+				}
+			} catch (NoSuchElementException e) {
+				System.out.println(e.toString());
+			}
+		}
+		objects.add(newObject);
 	}
 
 	public void update(T newObject) throws ObjectDoesNotExistsException {

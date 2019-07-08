@@ -19,7 +19,7 @@ import br.ufrpe.pokemondb.business.PokemonController;
 import br.ufrpe.pokemondb.business.beans.Pokemon;
 import br.ufrpe.pokemondb.exceptions.ObjectDoesNotExistsException;
 
-public class MainFrame implements ActionListener{
+public class MainFrame extends AbstractFrame implements ActionListener{
 	
 	private static MainFrame instance;
 	
