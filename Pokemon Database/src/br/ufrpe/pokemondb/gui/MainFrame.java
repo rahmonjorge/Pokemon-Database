@@ -54,11 +54,11 @@ public class MainFrame extends AbstractFrame implements ActionListener{
 		toolBar.setRollover(true);
 			//Tool Bar Buttons
 			JButton button = null;
-			button = ButtonBuilder.createButton("Novo","NEW","New Pokemon", this);
+			button = ButtonBuilder.create("Novo","NEW","New Pokemon", this);
 			toolBar.add(button);
-			button = ButtonBuilder.createButton("Remover","REMOVE","Delete Pokemon", this);
+			button = ButtonBuilder.create("Remover","REMOVE","Delete Pokemon", this);
 			toolBar.add(button);
-			button = ButtonBuilder.createButton("Editar","EDIT","Edit Pokemon", this);
+			button = ButtonBuilder.create("Editar","EDIT","Edit Pokemon", this);
 			toolBar.add(button);
 			
 		//Main Framework

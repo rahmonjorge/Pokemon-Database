@@ -42,19 +42,22 @@ public class Pokemon {
 	public void setLegendary(boolean legendary) {
 		this.legendary = legendary;
 	}
-	public boolean equals(Pokemon p) {
-		if(
-				this.number == p.getNumber() &&
-				this.name.equals(p.getName()) &&
-				this.type1.equals(p.getType1()) &&
-				this.type2.equals(p.type2) &&
-				this.legendary == p.getLegendary()) {
-			return true;
+	@Override
+	public boolean equals(Object obj) {
+		if(obj instanceof Pokemon) {
+			if(
+					this.number == ((Pokemon) obj).getNumber() &&
+					this.name.equals(((Pokemon) obj).getName()) &&
+					this.type1.equals(((Pokemon) obj).getType1()) &&
+					this.type2.equals(((Pokemon) obj).getType2()) &&
+					this.legendary == ((Pokemon) obj).getLegendary()) {
+				return true;
+			}
 		}
 		return false;
 	}
 	@Override
 	public String toString() {
-		return "Number: " + number + "Name" + name;
+		return "Number: " + number + " Name: " + name;
 	}
 }

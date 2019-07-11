@@ -70,9 +70,7 @@ public class NewPokemonFrame extends AbstractFrame implements ActionListener, It
 		JLabel label = new JLabel("Número");
 		label.setAlignmentX(Component.LEFT_ALIGNMENT);
 		mainPanel.add(label);
-		numberField = new JTextField(30);
-		numberField.setMaximumSize(new Dimension(400,0));
-		numberField.setAlignmentX(Component.LEFT_ALIGNMENT);
+		numberField = FieldBuilder.create(30, new Dimension(400,0), Component.LEFT_ALIGNMENT);
 		mainPanel.add(numberField);
 		
 		label = new JLabel("Nome");
@@ -99,7 +97,7 @@ public class NewPokemonFrame extends AbstractFrame implements ActionListener, It
 		legendaryCheckBox.addItemListener(this);
 		mainPanel.add(legendaryCheckBox);
 		
-		JButton defaultButton = ButtonBuilder.createButton("Adicionar", "ADD", null, this);
+		JButton defaultButton = ButtonBuilder.create("Adicionar", "ADD", null, this);
 		addPokemonWindow.getContentPane().add(defaultButton, BorderLayout.PAGE_END);
 		addPokemonWindow.getRootPane().setDefaultButton(defaultButton);
 		
