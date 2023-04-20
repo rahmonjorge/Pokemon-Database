@@ -19,3 +19,4 @@ Para editar, selecione a linha na tabela e clique em [Editar]. Uma janela pop-up
 ![image](https://user-images.githubusercontent.com/44070986/233493148-391be632-43ad-48b5-900f-e96e1b184c35.png)
 
 ## Sobre
+Este projeto foi desenvolvido de Junho a Julho de 2019 para a disciplina de Introdução à Programação II ministrada por George Gomes Cabral e Filipe Rolim Cordeiro na Universidade Federal Rural de Pernambuco.
