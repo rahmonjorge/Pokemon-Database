@@ -3,6 +3,9 @@
 ## Descrição
 Pokemon Database é uma interface gráfica simples para um banco de dados de pokemóns desenvolvido usando Java e Swing, com implementação que segue o padrão CRUD.
 
+## Instalação
+Você pode clonar o repositório ou baixar o executável: [pokemon-database.jar](https://drive.google.com/file/d/1cPdQ6H-geOdz6YsBkRg2YIm3nXj3v4Io/view?usp=share_link)
+
 ## Capturas de Tela
 
 ### Menu Inicial
