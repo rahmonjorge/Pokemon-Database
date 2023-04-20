@@ -9,7 +9,7 @@ import br.ufrpe.pokemondb.exceptions.MaxRepositoryCapacityException;
 import br.ufrpe.pokemondb.exceptions.ObjectAlreadyExistsException;
 import br.ufrpe.pokemondb.exceptions.ObjectDoesNotExistsException;
 /*
- * PokemonController: Contém o repositório de pokemons e as regras de negócio.
+ * PokemonController: Contem o repositorio de pokemons e as regras de negocio.
  * */
 public class PokemonController {
 	private static PokemonController instance;
@@ -33,9 +33,9 @@ public class PokemonController {
 			throw new MaxRepositoryCapacityException();
 		}
 		if(name.length() < 1)
-			throw new IllegalArgumentException("Invalid Pokémon Name.");
+			throw new IllegalArgumentException("Invalid Pokemon Name.");
 		if(number < 1)
-			throw new IllegalArgumentException("Invalid Pokémon Number.");
+			throw new IllegalArgumentException("Invalid Pokemon Number.");
 		Pokemon p = new Pokemon(number, name, type1, type2, legendary);
 		pokemonRepository.add(p);
 	}

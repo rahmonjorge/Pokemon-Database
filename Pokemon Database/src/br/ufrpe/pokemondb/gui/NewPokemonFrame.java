@@ -67,7 +67,7 @@ public class NewPokemonFrame extends AbstractFrame implements ActionListener, It
 			mainPanel.setBorder(new TitledBorder(new LineBorder(Color.BLACK), "Editar Pokemon"));
 		
 		//Main Panel Contents
-		JLabel label = new JLabel("Número");
+		JLabel label = new JLabel("Numero");
 		label.setAlignmentX(Component.LEFT_ALIGNMENT);
 		mainPanel.add(label);
 		numberField = FieldBuilder.create(30, new Dimension(400,0), Component.LEFT_ALIGNMENT);
@@ -92,7 +92,7 @@ public class NewPokemonFrame extends AbstractFrame implements ActionListener, It
 		type2ComboBox.setAlignmentX(Component.LEFT_ALIGNMENT);
 		mainPanel.add(type2ComboBox);
 		
-		legendaryCheckBox = new JCheckBox("Lendário?");
+		legendaryCheckBox = new JCheckBox("Lendario?");
 		legendaryCheckBox.setAlignmentX(Component.LEFT_ALIGNMENT);
 		legendaryCheckBox.addItemListener(this);
 		mainPanel.add(legendaryCheckBox);
@@ -136,19 +136,19 @@ public class NewPokemonFrame extends AbstractFrame implements ActionListener, It
 				JOptionPane.showMessageDialog(new JFrame(), "NullPointerException. Source: " + e1.getMessage());
 				e1.printStackTrace();
 			} catch (ObjectAlreadyExistsException e1) {
-				JOptionPane.showMessageDialog(new JFrame(), "Este pokémon já foi criado."); //TODO not firing
+				JOptionPane.showMessageDialog(new JFrame(), "Este pokemon ja foi criado."); //TODO not firing
 				e1.printStackTrace();
 			} catch (MaxRepositoryCapacityException e1) {
-				JOptionPane.showMessageDialog(new JFrame(), "Foi atingida a capacidade máxima do repositório de pokémons.");
+				JOptionPane.showMessageDialog(new JFrame(), "Foi atingida a capacidade maxima do repositorio de pokemons.");
 				e1.printStackTrace();
 			} catch (ObjectDoesNotExistsException e1) {
-				JOptionPane.showMessageDialog(new JFrame(), "O pokémon selecionado não existe.\nIsso não deveria ser possível.");
+				JOptionPane.showMessageDialog(new JFrame(), "O pokemon selecionado nao existe.\nIsso nao deveria ser possivel.");
 				e1.printStackTrace();
 			} catch (NumberFormatException e1) {
-				JOptionPane.showMessageDialog(new JFrame(), "Insira um número válido.");
+				JOptionPane.showMessageDialog(new JFrame(), "Insira um numero valido.");
 				e1.printStackTrace();
 			} catch (IllegalArgumentException e1) {
-				JOptionPane.showMessageDialog(new JFrame(), "Insira um nome válido.");
+				JOptionPane.showMessageDialog(new JFrame(), "Insira um nome valido.");
 				e1.printStackTrace();
 			}
 		}

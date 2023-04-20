@@ -29,7 +29,7 @@ public class MainFrame extends AbstractFrame implements ActionListener{
 	private JScrollPane tableContainer;
 	
 	private MainFrame() {
-		mainWindow = new JFrame("Pokémon Database");
+		mainWindow = new JFrame("Pokemon Database");
 		dataModel = new TableModel(PokemonController.getInstance().list());
 		table = new JTable(dataModel);
 		tableContainer = new JScrollPane(table);
@@ -91,7 +91,7 @@ public class MainFrame extends AbstractFrame implements ActionListener{
 				} catch (ObjectDoesNotExistsException e1) {
 					e1.printStackTrace();
 				} catch (NullPointerException e1) {
-					JOptionPane.showMessageDialog(new JFrame(), "A linha selecionada está vazia.");
+					JOptionPane.showMessageDialog(new JFrame(), "A linha selecionada esta vazia.");
 					e1.printStackTrace();
 				}
 			}
@@ -106,7 +106,7 @@ public class MainFrame extends AbstractFrame implements ActionListener{
 			if(table.getSelectedRowCount() > 0) {
 				int optionSelected = JOptionPane.showConfirmDialog(
                         mainWindow, "Tem certeza que deseja remover o objeto selecionado(s)?",
-                        "Confirmar Remoção",
+                        "Confirmar Remocao",
                         JOptionPane.YES_NO_OPTION);
                  if (optionSelected == JOptionPane.YES_OPTION) {
                 	try {
@@ -114,7 +114,7 @@ public class MainFrame extends AbstractFrame implements ActionListener{
 						Facade.getInstance().remove(selectedPokemon);
 						updateTable();
 					} catch (ObjectDoesNotExistsException e1) {
-						JOptionPane.showMessageDialog(new JFrame(), "Houve uma tentativa de remover um objeto que não existe no repositório.\nIsso devia ser impossível.");
+						JOptionPane.showMessageDialog(new JFrame(), "Houve uma tentativa de remover um objeto que nao existe no repositorio.\nIsso devia ser impossivel.");
 						e1.printStackTrace();
 					}
                  }
