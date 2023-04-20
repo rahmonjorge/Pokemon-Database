@@ -1,7 +1,7 @@
 # Pokemon Database
 
 ## Descrição
-Pokemon Database é um banco de dados simples desenvolvido em Java e Swing, com implementação que segue o padrão CRUD.
+Pokemon Database é uma interface gráfica simples para um banco de dados de pokemóns desenvolvido usando Java e Swing, com implementação que segue o padrão CRUD.
 
 ## Capturas de Tela
 
