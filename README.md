@@ -1,2 +1,21 @@
-# Pokemon-Database
-Pokemon Database é um banco de dados simples implementado seguindo o padrão CRUD que armazena pokémons de acordo com o seu número, nome, tipos e raridade (se é lendário ou não).
+# Pokemon Database
+Pokemon Database é um banco de dados simples implementado seguindo o padrão CRUD que armazena pokémons.
+
+![image](https://user-images.githubusercontent.com/44070986/233491514-cc07772e-2481-4359-8d92-11f6501c6489.png)
+
+## Adicionando pokémons
+Clique em [Novo] para adicionar um pokémon. Cada pokémon possui Nome, Número, dois Tipos e uma tag Lendário. Não preencher algum dos campos resultará em um erro.
+
+![image](https://user-images.githubusercontent.com/44070986/233492122-1110d348-b4f9-48a2-89d6-79152529a314.png)
+
+## Removendo pokémons
+Para remover uma entrada, selecione a linha na tabela e clique em [Remover].
+
+![image](https://user-images.githubusercontent.com/44070986/233492951-5574f87c-ac6f-4fc2-9a72-505d95d376b2.png)
+
+## Editando pokémons
+Para editar, selecione a linha na tabela e clique em [Editar]. Uma janela pop-up aparece com as informações sendo editadas.
+
+![image](https://user-images.githubusercontent.com/44070986/233493148-391be632-43ad-48b5-900f-e96e1b184c35.png)
+
+## Sobre
